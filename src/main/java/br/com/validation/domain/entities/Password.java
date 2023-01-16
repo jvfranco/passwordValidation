@@ -20,6 +20,7 @@ public class Password {
     private String password;
 
     @Column(name = "valid", length = 5)
+    @Setter
     private Boolean isValid;
 
     public Password(String password) {

@@ -1,5 +1,6 @@
 package br.com.validation.application.validation.steps;
 
+import br.com.validation.application.exceptions.ValidatorException;
 import br.com.validation.domain.entities.Password;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,9 +20,11 @@ public class LowerValidation extends ValidationStep {
         Pattern pattern = Pattern.compile("\\p{Lower}+");
 
         if (!pattern.matcher(password.getPassword()).find()) {
-            log.info("A senha não possui caracteres minúsculos.");
-            throw new RuntimeException("A senha não possui caracteres minúsculos.");
+            log.error("A senha não possui caracteres minúsculos.");
+            throw new ValidatorException("A senha não possui caracteres minúsculos.");
         }
+
+        log.info("Step 3 - OK");
 
         if (this.next != null) {
             this.next.execute(password);

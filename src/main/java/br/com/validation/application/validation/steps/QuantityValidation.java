@@ -1,5 +1,6 @@
 package br.com.validation.application.validation.steps;
 
+import br.com.validation.application.exceptions.ValidatorException;
 import br.com.validation.domain.entities.Password;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,9 +20,11 @@ public class QuantityValidation extends ValidationStep {
         Pattern pattern = Pattern.compile("[^\\p{Space}]{9,}");
 
         if (!pattern.matcher(password.getPassword()).find()) {
-            log.info("Quantidade de caracteres menor que 9 ou possui espaços em branco.");
-            throw new RuntimeException("Quantidade de caracteres menor que 9.");
+            log.error("Quantidade de caracteres menor que 9 ou possui espaços em branco.");
+            throw new ValidatorException("Quantidade de caracteres menor que 9.");
         }
+
+        log.info("Step 1 - OK");
 
         if (this.next != null) {
             this.next.execute(password);

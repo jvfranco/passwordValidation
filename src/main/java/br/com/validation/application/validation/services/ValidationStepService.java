@@ -2,10 +2,17 @@ package br.com.validation.application.validation.services;
 
 import br.com.validation.application.validation.steps.*;
 import br.com.validation.domain.entities.Password;
+import br.com.validation.domain.services.PasswordService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class ValidationStepService {
+
+    @Autowired
+    private PasswordService passwordService;
 
     private ValidationStep step;
 
@@ -30,7 +37,16 @@ public class ValidationStepService {
         this.step = steps[0];
     }
 
-    public void execute(Password password) {
-        this.step.execute(password);
+    public boolean execute(Password password) {
+        try {
+            this.step.execute(password);
+        } catch (Exception ex) {
+            log.error(String.format("Mensagens de Erro: %s", ex.getMessage()));
+            return false;
+        }
+        password.encrypt();
+        password.setIsValid(true);
+        this.passwordService.save(password);
+        return true;
     }
 }
