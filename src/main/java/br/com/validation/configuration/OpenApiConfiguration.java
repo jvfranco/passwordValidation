@@ -16,7 +16,8 @@ public class OpenApiConfiguration {
                         .title("Password Validation")
                         .description("Password Validation API")
                         .version("v1.0")
-                        .license(new License().name("Apache 2.0").url("http://springdoc.org")));
+                        .license(new License()
+                                .name("Apache 2.0").url("http://springdoc.org")));
     }
 
 

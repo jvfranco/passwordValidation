@@ -1,15 +1,15 @@
 package br.com.validation.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Getter
 @Builder
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Password {
 
@@ -21,4 +21,12 @@ public class Password {
 
     @Column(name = "valid", length = 5)
     private Boolean isValid;
+
+    public Password(String password) {
+        this.password = password;
+    }
+
+    public Password encrypt() {
+        return new Password(new BCryptPasswordEncoder().encode(this.getPassword()));
+    }
 }

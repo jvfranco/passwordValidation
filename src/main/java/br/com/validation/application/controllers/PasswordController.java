@@ -2,8 +2,8 @@ package br.com.validation.application.controllers;
 
 import br.com.validation.application.models.PasswordRequest;
 import br.com.validation.application.models.PasswordResponse;
+import br.com.validation.application.validation.services.ValidationStepService;
 import br.com.validation.domain.entities.Password;
-import br.com.validation.domain.services.EncryptService;
 import br.com.validation.domain.services.PasswordService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,21 +15,23 @@ import org.springframework.web.bind.annotation.*;
 @AllArgsConstructor
 @Slf4j
 public class PasswordController {
-
-    private final EncryptService encryptService;
     private final PasswordService passwordService;
 
+    private final ValidationStepService validationStepService;
+
+
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public PasswordResponse validation(@RequestBody PasswordRequest passwordRequest) {
         log.info(passwordRequest.password());
-        String passwordEncrypt = this.encryptService.encrypt(passwordRequest.password());
-        log.info(passwordEncrypt);
 
         Password pass = Password.builder()
-                .password(passwordEncrypt)
-                .isValid(Boolean.TRUE)
+                .password(passwordRequest.password())
                 .build();
+
+        this.validationStepService.execute(pass);
+
+        log.info(pass.encrypt().getPassword());
 
         this.passwordService.save(pass);
 
