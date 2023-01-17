@@ -27,7 +27,7 @@ public class Password {
         this.password = password;
     }
 
-    public Password encrypt() {
-        return new Password(new BCryptPasswordEncoder().encode(this.getPassword()));
+    public void encrypt() {
+        this.password = new BCryptPasswordEncoder().encode(this.getPassword());
     }
 }
