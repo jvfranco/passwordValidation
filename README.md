@@ -85,29 +85,35 @@ Status | Parâmetro | Tipo | Descrição
 <h3>:unlock: Etapas do Desenvolvimento</h3>
 
 <h5>:blue_book: Resumo</h5>
-<p>Para criação da solução pensei em dois princípios da Orientação a Objetos, a Coesão e o Acoplamento. Criei uma classe para cada uma das validações, buscando evitar
+
+Para criação da solução pensei em dois princípios da Orientação a Objetos, a Coesão e o Acoplamento. Criei uma classe para cada uma das validações, buscando evitar
 grandes classes com diversos métodos, melhorando a leitura e entendimento do código. Para executar as validações pensei em utilizar expressões regulares, não utilizo comumente
-em meu dia a dia, o que necessitou de pesquisas adicionais para implementação no desafio. Para validação de caracteres duplicados utilizei a coleção set, que não permite itens duplicados,
+em meu dia a dia, o que necessitou de pesquisas adicionais para implementação no desafio. Para validação de caracteres duplicados utilizei a coleção _set_, que não permite itens duplicados,
 verificando o tamanho da senha antes e pós adição na collection. Para organização dos pacotes, pensei em separar as classes relacionadas a entidade, Password, das classes relacionados
-a regras de negócio das validações. Também utilizei o design pattern Chain of Responsibility.</p>
+a regras de negócio das validações. Também utilizei o _design pattern Chain of Responsibility_.
 
 <h5>:green_book: Detalhes</h5>
+
 * Para Execução das validações utilizei expressões regulares, não estou habituado em utilizar a classe Pattern do Java, o que demandou pesquisa e leitura da documentação.
+
 * Na validação de caracteres duplicados utilizei uma _collection Set_, no caso _HashSet_, faço um _split_ na senha e depois adiciono os caracteres na _collection_, como os
 _sets_ não permitem itens duplicados, caso haja caracteres duplicados, um não será inserido na _collection_, o que modificará o tamanho da senha, com isso comparo o tamanho da 
 _collection_ com a senha original e verifico se estão ou não com o mesmo tamanho.
+
 * Para a separação dos pacotes, pensei em deixar as classes relacionadas ao modelo da senha em um pacote denominado _domain_, onde tenho acesso a base de dados. Outro pacote denominado 
 _configuration_, onde deixei as classes de configuração, no caso somente a configuração do SpringDoc OpenAPI. E um terceiro pacote denominado _application_, onde coloquei as classes
 de modelo de request e response, utilizei as classes _Record_ do Java, para manter a imutabilidade dos objetos, controller com um endpoint POST ( /password/validation ) e as classes de validação da senha, agrupando as regras de negócio.
+
 * Resolvi deixar as classes de validação com somente um método em cada, tentando criar classes coesas, com poucos atributos e somente uma função, penso que classes sem coesão tendem a
 crescer demasiadamente conforme evolução da aplicação, o que acaba descaracterizando o motivo de sua criação. Busquei atender o primeiro princípio do SOLID, 
 o Princípio da Responsabilidade Única.
+
 * No desenvolvimento percebi que as validações poderiam ser realizadas com vários _ifs_, então resolvi pesquisar por um _design pattern_ que se encaixassem no meu desenvolvimento,
 e encontrei o _Chain of Responsibility_, no qual crio uma corrente ( _chain_ ) com todas as classes das validações que desejo realizar e conforme as validações se confirmam elas próprias
 chamam a próxima validação, caso a senha não seja validada lanço uma _exception_ ( _ValidatorException_ ), a qual encerra a execução das validações e informo através de logs o motivo da não validação, 
 nesse caso o retorno da API será _false_ e a senha não será gravada em banco.
-* Deixei o retorno da API com código HTTP 200 OK, mesmo que a senha não tenha sido validada, deixei desta forma porque demonstra que ocorreu o processamento e que a senha não passou nos critérios pré definidos.
 
+* Deixei o retorno da API com código HTTP 200 OK, mesmo que a senha não tenha sido validada, deixei desta forma porque demonstra que ocorreu o processamento e que a senha não passou nos critérios pré definidos.
 
 <h3>:books: Documentação Consultada:</h3>
 
