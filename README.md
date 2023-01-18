@@ -61,7 +61,8 @@ Parâmetro | Tipo | Descrição
 password | String | Senha que será validada
 
 <h5>:mag: Exemplo:</h5>
-```json lines
+
+```json
 {
     "password": "AbTp9!fok"
 }
@@ -74,7 +75,8 @@ Status | Parâmetro | Tipo | Descrição
 200 OK | isValid | Boolean | <b>true</b> caso a senha seja valida e <b>false</b> caso inválida  
 
 <h5>:mag: Exemplo:</h5>
-```json lines
+
+```json
 {
   "isValid": true
 }
