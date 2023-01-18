@@ -61,9 +61,11 @@ Parâmetro | Tipo | Descrição
 password | String | Senha que será validada
 
 <h5>:mag: Exemplo:</h5>
+```
 {
     "password": "AbTp9!fok"
 }
+```
 
 * Retorno
 
@@ -72,9 +74,11 @@ Status | Parâmetro | Tipo | Descrição
 200 OK | isValid | Boolean | <b>true</b> caso a senha seja valida e <b>false</b> caso inválida  
 
 <h5>:mag: Exemplo:</h5>
+```
 {
   "isValid": true
 }
+```
 
 <h3>:books: Documentação Consultada:</h3>
 
