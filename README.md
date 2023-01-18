@@ -60,12 +60,27 @@ Parâmetro | Tipo | Descrição
 :-------: | :--: | :-------:
 password | String | Senha que será validada
 
+<h5>:mag: Exemplo:</h5>
+{
+    "password": "AbTp9!fok"
+}
+
 * Retorno
 
-<h3>Documentação Consultada:</h3>
+Status | Parâmetro | Tipo | Descrição 
+:----: | :-------: | :--: | :-------:
+200 OK | isValid | Boolean | <b>true</b> caso a senha seja valida e <b>false</b> caso inválida  
+
+<h5>:mag: Exemplo:</h5>
+{
+  "isValid": true
+}
+
+<h3>:books: Documentação Consultada:</h3>
 
 1. [Class Pattern](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/regex/Pattern.html)
 2. [Class Matcher](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/regex/Matcher.html#matches())
-3. 
+3. [Class BCryptPasswordEncoder](https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/crypto/bcrypt/BCryptPasswordEncoder.html)
+4. [SpringDoc](https://springdoc.org/v2/#migrating-from-springfox)
 
     
