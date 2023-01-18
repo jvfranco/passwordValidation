@@ -108,10 +108,10 @@ de modelo de request e response, utilizei as classes _Record_ do Java, para mant
 crescer demasiadamente conforme evolução da aplicação, o que acaba descaracterizando o motivo de sua criação. Busquei atender o primeiro princípio do SOLID, 
 o Princípio da Responsabilidade Única.
 
-* No desenvolvimento percebi que as validações poderiam ser realizadas com vários _ifs_, então resolvi pesquisar por um _design pattern_ que se encaixassem no meu desenvolvimento,
+* No desenvolvimento percebi que as validações poderiam ser realizadas com vários _ifs_, então resolvi pesquisar por um _design pattern_ que se encaixasse no meu desenvolvimento,
 e encontrei o _Chain of Responsibility_, no qual crio uma corrente ( _chain_ ) com todas as classes das validações que desejo realizar e conforme as validações se confirmam elas próprias
 chamam a próxima validação, caso a senha não seja validada lanço uma _exception_ ( _ValidatorException_ ), a qual encerra a execução das validações e informo através de logs o motivo da não validação, 
-nesse caso o retorno da API será _false_ e a senha não será gravada em banco. Quando a senha é validada, é gravada em banco depois de ser criptografada com a classe _BCryptPasswordEncoder_.
+nesse caso o retorno da API será _false_ e a senha não será gravada em banco. Quando a senha é validada, é gravada em banco depois de ser criptografada com a classe _BCryptPasswordEncoder_ e o retorno da API é _true_.
 
 * Deixei o retorno da API com código HTTP 200 OK, mesmo que a senha não tenha sido validada, deixei desta forma porque demonstra que ocorreu o processamento e que a senha não passou nos critérios pré definidos.
 
